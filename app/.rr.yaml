@@ -3,9 +3,26 @@ rpc:
     listen: 'tcp://127.0.0.1:6001'
 jobs:
     pool:
-        num_workers: 2
+        num_workers: 1
         max_worker_memory: 100
-    consume: {  }
+    consume: [ "kafka" ]
+
+    pipelines:
+      kafka:
+        driver: kafka
+        config:
+          auto_create_topics_enable: true
+          consumer_options:
+            topics: [ "users" ]
+
+
 server:
     command: 'php app.php'
     relay: pipes
+
+kafka:
+
+  # Kafka brokers addresses
+  #
+  # Required to use Kafka driver
+  brokers: [ "127.0.0.1:9092" ]
