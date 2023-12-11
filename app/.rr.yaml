@@ -1,0 +1,11 @@
+version: '3'
+rpc:
+    listen: 'tcp://127.0.0.1:6001'
+jobs:
+    pool:
+        num_workers: 2
+        max_worker_memory: 100
+    consume: {  }
+server:
+    command: 'php app.php'
+    relay: pipes
